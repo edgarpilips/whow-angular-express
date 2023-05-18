@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: mariadb:10.10
+    ports:
+      - '3306:3306'
+    environment:
+      MARIADB_ROOT_PASSWORD: '1234'
+      MARIADB_DATABASE: 'wh'
+    volumes:
+      - 'mysqldb:/var/lib/mysql'
+  web:
+    image: type-express
+    depends_on:
+      - db
+    ports:
+      - '4000:4000'
+    command: >
+      sh -c "npm run dev"
+    restart: on-failure:5
+    volumes:
+      - .:/user/app
+
+# networks:
+#   default:
+#       name: wh-network
+
+volumes:
+  mysqldb:
+    # external: true
+  # data:
+  #   driver: local

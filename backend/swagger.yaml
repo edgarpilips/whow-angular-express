@@ -1,0 +1,142 @@
+tags:
+- name: Company
+  description: Company API
+
+paths:
+# [GET] users
+  /company:
+    get:
+      tags:
+      - Company
+      summary: Get company list
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+# [POST] users
+    post:
+      tags:
+      - Company
+      summary: Add company
+      parameters:
+      - name: body
+        in: body
+        description: Company data
+        required: true
+        schema:
+          $ref: '#/definitions/company'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [GET] users/id
+  /company/{id}:
+    get:
+      tags:
+      - Company
+      summary: Get company by id
+      parameters:
+      - name: id
+        in: path
+        description: Company Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [PUT] users/id
+    put:
+      tags:
+      - Company
+      summary: Update company By Id
+      parameters:
+      - name: id
+        in: path
+        description: company Id
+        required: true
+      - name: body
+        in: body
+        description: user Data
+        required: true
+        schema:
+          $ref: '#/definitions/company'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [DELETE] users/id
+    delete:
+      tags:
+      - Company
+      summary: Delete company By Id
+      parameters:
+      - name: id
+        in: path
+        description: company Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+
+  /postal-address/:id:
+    delete:
+      tags:
+      - Company
+      summary: Delete Postal Address By Id
+      parameters:
+      - name: id
+        in: path
+        description: company Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# definitions
+definitions:
+  company:
+    type: object
+    required:
+        - name
+        - postalAddresses
+    properties:
+      name:
+        type: string
+        description: Company Name
+      postalAddresses:
+        type: onject[]
+        description: Postal Addresses
+      password:
+        type: string
+        description: user Password
+
+schemes:
+ - https
+ - http

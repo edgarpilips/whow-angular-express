@@ -1,0 +1,28 @@
+<div mat-dialog-content>
+  <p>{{ formData.title }} new company</p>
+  <mat-form-field>
+    <mat-label>Company Name</mat-label>
+    <input matInput [(ngModel)]="formData.name" />
+  </mat-form-field>
+  <p>More Info</p> 
+  <button mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="addAddress()">Add Company Address</button> 
+  <div class="address-container" *ngFor="let addr of formData.addrs; let i=index">
+    <mat-form-field class="address">
+      <mat-label>Code</mat-label>
+      <input matInput [(ngModel)]="addr.code" />
+    </mat-form-field>
+    <mat-form-field class="address">
+      <mat-label>Address</mat-label>
+      <input matInput [(ngModel)]="addr.address" />
+    </mat-form-field>
+    <button mat-icon-button color="warn" (click)="removeAddress(i)">
+      <mat-icon >delete</mat-icon>
+    </button>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="formData" cdkFocusInitial>
+    Ok
+  </button>
+</div>
